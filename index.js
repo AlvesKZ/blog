@@ -3,6 +3,8 @@ const app = express();
 const bodyParser = require("body-parser");
 const connection = require("./database/database");
 
+const categoriesController = require("./categories/CategoriesController");
+
 app.set("view engine", "ejs");
 
 app.use(express.static("public"));
@@ -18,6 +20,8 @@ connection
   .catch((error) => {
     console.log(error);
   });
+
+app.use("/", categoriesController);
 
 app.get("/", (req, res) => {
   res.render("index");
